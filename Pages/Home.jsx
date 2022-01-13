@@ -44,10 +44,8 @@ const Home = ({ navigation, route }) => {
           data={listDetails}
           renderItem={({item})=>(
             <Note deleteNote={deleteNote} id={item.id} title={item.title} details={item.details} />
-          )}
+          )}/>
             
-        />
-       
       </View>
       <View style={{ height: "20%" }}>
         <FAB small icon="plus" style={styles.fabStyle} onPress={() => {
@@ -73,10 +71,6 @@ const styles = StyleSheet.create({
     height: "100%",
     flexDirection: "column",
   },
-  plus: {
-    fontSize: 20,
-    color: "black"
-  },
   titlesBox: {
     display: "flex",
     flexDirection: "row",
@@ -94,5 +88,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     height: "60%",
+    borderColor:"black",
+    borderWidth: 1,
   },
 });

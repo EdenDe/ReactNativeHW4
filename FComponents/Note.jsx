@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
   flex: {
     display: "flex",
     flexDirection: "row",
-    justifyContent:"flex-end"
-
+    justifyContent:"flex-end",
+    borderColor:"black",
+    borderWidth: 1,
+    padding:10   
   },
   textStyle: {
     width: "40%",

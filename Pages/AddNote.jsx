@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { FAB } from 'react-native-paper';
@@ -19,24 +19,26 @@ const AddNote = ({ navigation, route }) => {
       details: noteDetails
     }
     navigation.navigate({
-      name:'Home',
+      name: 'Home',
       params: { note: noteTemp }
     });
   }
 
   return (
-    <View>
-      <Text style={styles.textS}> Note title: </Text>
-      <TextInput onChangeText={noteTitle => SetNoteTitle(noteTitle)}
-        defaultValue={noteTitle} style={styles.input} />
+    <View style={{height: '100%'}}>
+      <View style={styles.rowS}>
+        <Text style={styles.textS}> Note title: </Text>
+        <TextInput onChangeText={noteTitle => SetNoteTitle(noteTitle)}
+          defaultValue={noteTitle} style={styles.input} />
+      </View>
+      <View style={styles.rowS}>
+        <Text style={styles.textS}> Note Detail: </Text>
+        <TextInput onChangeText={noteDetails => setNoteDetail(noteDetails)}
+          defaultValue={noteDetails} style={styles.input} />
 
-      <Text style={styles.textS}> Note Detail: </Text>
-      <TextInput onChangeText={noteDetails => setNoteDetail(noteDetails)}
-        defaultValue={noteDetails} style={styles.input} />
-
-
+      </View>
       <View style={{ height: "20%" }}>
-        <FAB large icon="plus" style={styles.fabStyle2} onPress={() => AddAndReturn()} />
+        <FAB icon="plus" style={styles.fabStyle2} onPress={() => AddAndReturn()} />
       </View>
     </View>
   )
@@ -50,14 +52,21 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "60%"
   },
+  rowS:{
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  }, 
   fabStyle2: {
     position: 'absolute',
     right: "20%",
     bottom: "10%",
-
+   
   },
   textS: {
-    color: "green"
+    width:"30%",
+    textAlign: "center",
   }
 });
 
