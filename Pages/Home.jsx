@@ -15,7 +15,7 @@ const Home = ({ navigation, route }) => {
   const [noteID, SetnoteID] = useState(listTemp.length+1)
 
   useEffect(()=>{
-
+   
     if(route.params?.note)
     {
       let temp =[...listDetails, route.params?.note];
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: "5%",
     bottom: "50%",
+    backgroundColor:'lightblue'
   },
   container: {
     flex: 1,

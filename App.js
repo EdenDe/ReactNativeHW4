@@ -18,7 +18,6 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} options={{title:"List of notes"}}  />
           <Stack.Screen name="AddNote" component={AddNote} />
         </Stack.Navigator>
-
       </NavigationContainer>
     </PaperProvider>
   );

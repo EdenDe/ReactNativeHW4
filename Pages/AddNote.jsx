@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { FAB } from 'react-native-paper';
+import React, { useState } from 'react'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+
 
 const AddNote = ({ navigation, route }) => {
 
@@ -12,35 +11,51 @@ const AddNote = ({ navigation, route }) => {
   console.log(noteID)
 
   const AddAndReturn = () => {
-
-    let noteTemp = {
-      id: noteID,
-      title: noteTitle,
-      details: noteDetails
+  
+    if((noteTitle || noteDetails) === undefined )
+    {
+      navigation.navigate({
+        name: 'Home',
+      });
     }
-    navigation.navigate({
-      name: 'Home',
-      params: { note: noteTemp }
-    });
+    else{
+      let noteTemp = {
+        id: noteID,
+        title: noteTitle,
+        details: noteDetails
+      }
+      navigation.navigate({
+        name: 'Home',
+        params: { note: noteTemp }
+      });
+    }
+   
   }
 
   return (
-    <View style={{height: '100%'}}>
-      <View style={styles.rowS}>
-        <Text style={styles.textS}> Note title: </Text>
-        <TextInput onChangeText={noteTitle => SetNoteTitle(noteTitle)}
-          defaultValue={noteTitle} style={styles.input} />
-      </View>
-      <View style={styles.rowS}>
-        <Text style={styles.textS}> Note Detail: </Text>
-        <TextInput onChangeText={noteDetails => setNoteDetail(noteDetails)}
-          defaultValue={noteDetails} style={styles.input} />
 
+    <View >
+      <View style={{marginTop: 10}}>
+        <View style={styles.rowS}>
+          <Text style={styles.textS}> Note title: </Text>
+          <TextInput onChangeText={noteTitle => SetNoteTitle(noteTitle)}
+            defaultValue={noteTitle} style={styles.input} />
+        </View>
+        <View style={styles.rowS}>
+          <Text style={styles.textS}> Note Detail: </Text>
+          <TextInput onChangeText={noteDetails => setNoteDetail(noteDetails)}
+            defaultValue={noteDetails} style={styles.input} />
+
+        </View>
       </View>
-      <View style={{ height: "20%" }}>
-        <FAB icon="plus" style={styles.fabStyle2} onPress={() => AddAndReturn()} />
+      <View style={styles.flexBox}>
+        <TouchableOpacity style={styles.btnBox} onPress={() => AddAndReturn()}>
+          <Text style={styles.btnPlus} > + </Text>
+        </TouchableOpacity>
       </View>
     </View>
+
+
   )
 }
 
@@ -50,24 +65,47 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    width: "60%"
+    width: "60%",
+    borderRadius:30
   },
-  rowS:{
+  rowS: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  }, 
-  fabStyle2: {
-    position: 'absolute',
-    right: "20%",
-    bottom: "10%",
-   
+  },
+  btnPlus: {
+    padding: 30,
+    fontSize: 30
+  },
+  btnBox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 100,
+    backgroundColor: "lightblue",
+    width: "30%",
+    marginTop:50
+  },
+  // fabStyle2: {
+  //   position: 'absolute',
+  //   right: "30%",
+  //   bottom: "70%",
+  //   width: 100,  
+  //   height: 100,   
+  //   borderRadius: 50,  
+  //   textAlign: 'center'          
+  // },
+  flexBox:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   textS: {
-    width:"30%",
+    width: "30%",
     textAlign: "center",
-  }
+  },
+
 });
 
 export default AddNote
